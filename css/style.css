@@ -1,0 +1,249 @@
+/* ==========================================================
+   Desenvor Digital — link na bio
+   ========================================================== */
+
+:root {
+  --laranja: #fd4e17;
+  --laranja-2: #ff7a21;
+  --laranja-logo: #e95026;
+  --gradiente: linear-gradient(90deg, #ff7a21 0.5%, #fd4e17 99.5%);
+  --texto: #f3f3f3;
+  --texto-suave: rgba(243, 243, 243, .55);
+  --fundo: #000;
+  --azul-avatar: #00101f;
+  --curva: cubic-bezier(.22, 1, .36, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--fundo); -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--texto);
+  background: var(--fundo);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::selection { background: var(--laranja); color: #fff; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Fundo ---------- */
+
+/* Grade fina que some para as bordas */
+.grade {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,122,33,.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,122,33,.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 20%, transparent 80%);
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 20%, transparent 80%);
+}
+
+/* Brilho laranja no topo, respirando devagar */
+.brilho {
+  position: absolute; top: 0; left: 0; right: 0; height: 560px;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.brilho span {
+  position: absolute; border-radius: 50%;
+  background: var(--gradiente); opacity: .42; filter: blur(120px);
+  animation: respira 9s ease-in-out infinite alternate;
+}
+.brilho span:nth-child(1) { width: 44vw; height: 300px; top: -200px; right: 5%; }
+.brilho span:nth-child(2) { width: 44vw; height: 300px; top: -260px; left: 35%; animation-delay: -3s; }
+.brilho span:nth-child(3) { width: 44vw; height: 300px; top: -240px; left: 2%; mix-blend-mode: plus-lighter; animation-delay: -6s; }
+@keyframes respira {
+  from { transform: translate3d(0, 0, 0) scale(1); opacity: .34; }
+  to   { transform: translate3d(0, 30px, 0) scale(1.12); opacity: .5; }
+}
+
+/* ---------- Barra do topo ---------- */
+
+.barra {
+  position: relative; z-index: 2;
+  background: var(--gradiente);
+  color: #fff; text-align: center;
+  padding: 18px 16px;
+  font-size: clamp(15px, 2.2vw, 24px);
+  letter-spacing: .01em; line-height: 1.35;
+}
+.barra strong { display: block; font-weight: 800; margin-top: 4px; }
+.barra, .sub, footer { text-wrap: balance; }
+
+/* ---------- Conteúdo ---------- */
+
+main {
+  position: relative; z-index: 1; flex: 1;
+  width: 100%; max-width: 880px; margin: 0 auto;
+  padding: clamp(48px, 8vw, 80px) 16px 48px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+
+/* Avatar com anel de luz girando */
+.avatar {
+  position: relative;
+  width: clamp(120px, 22vw, 176px); aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  isolation: isolate;
+}
+.avatar::before {
+  content: ""; position: absolute; inset: -3px; border-radius: 50%; z-index: -2;
+  background: conic-gradient(from var(--giro, 0deg), var(--laranja) 0deg, #ff9a4d 60deg, rgba(253,78,23,.25) 160deg, var(--laranja) 360deg);
+  animation: gira 6s linear infinite;
+}
+.avatar::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; z-index: -1;
+  background: radial-gradient(circle at 50% 35%, #03213b, var(--azul-avatar) 70%);
+  box-shadow: 0 0 60px rgba(253,78,23,.28);
+}
+.avatar img { width: 50%; height: auto; display: block; }
+@property --giro { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes gira { to { --giro: 360deg; } }
+
+.nome {
+  font-weight: 700; font-size: clamp(18px, 2.6vw, 24px); color: #fff; margin-top: 29px;
+}
+
+/* Headline */
+h1 {
+  font-weight: 400; font-size: clamp(30px, 5.2vw, 48px); line-height: 1.25;
+  letter-spacing: .01em; margin-top: 24px; color: #fff;
+}
+/* Dois blocos que não se partem: "Mais [palavra]" e "no seu atacado" */
+h1 .junto { white-space: nowrap; }
+@media (min-width: 768px) { h1 { white-space: nowrap; } }
+
+/* Palavra rotativa: todas empilhadas na mesma célula, então a largura é
+   fixa (a da maior) e o texto ao redor não se mexe */
+.rotativo {
+  display: inline-grid; vertical-align: bottom;
+  min-width: 4.3em; text-align: center; overflow: hidden;
+  font-weight: 700; color: #fff;
+  background: var(--gradiente);
+  border-radius: .22em; padding: .02em .3em .08em;
+  margin: 0 .12em;
+  box-shadow: 0 8px 30px -8px rgba(253,78,23,.6);
+}
+.rotativo .palavra {
+  grid-area: 1 / 1;
+  opacity: 0; transform: translateY(100%);
+  transition: transform .55s var(--curva), opacity .4s ease;
+}
+.rotativo .palavra.ativa { opacity: 1; transform: translateY(0); }
+.rotativo .palavra.saindo { opacity: 0; transform: translateY(-100%); }
+
+.sub {
+  font-size: clamp(16px, 2.6vw, 22px); line-height: 1.5; letter-spacing: .01em;
+  color: var(--texto-suave); margin-top: 16px; max-width: 640px;
+}
+.sub strong { color: #fff; font-weight: 700; }
+
+/* ---------- Botões ---------- */
+
+.links {
+  list-style: none; width: 100%; max-width: 520px;
+  display: flex; flex-direction: column; gap: 16px; margin-top: 44px;
+}
+.btn {
+  --x: 50%; --y: 50%;
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; min-height: 68px; padding: 14px 20px;
+  border-radius: 16px; text-decoration: none;
+  font-weight: 800; font-size: clamp(14px, 2.2vw, 16px); letter-spacing: .04em;
+  color: var(--texto);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,122,33,.35);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform .2s var(--curva), border-color .2s ease, background .2s ease, box-shadow .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Luz que segue o cursor */
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(220px circle at var(--x) var(--y), rgba(255,122,33,.22), transparent 60%);
+  opacity: 0; transition: opacity .25s ease;
+}
+.btn:hover::before { opacity: 1; }
+.btn:hover { transform: translateY(-2px); border-color: var(--laranja-2); background: rgba(253,78,23,.08); }
+.btn:active { transform: translateY(0) scale(.99); }
+.btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.btn .rotulo { flex: 1; text-align: left; }
+.btn .ico {
+  flex: none; width: 38px; height: 38px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(253,78,23,.14); color: var(--laranja-2);
+}
+.btn .seta { flex: none; opacity: .6; transition: transform .2s var(--curva), opacity .2s ease; }
+.btn:hover .seta { transform: translateX(4px); opacity: 1; }
+
+/* Principal: gradiente + reflexo passando */
+.btn.principal {
+  background: var(--gradiente); border-color: transparent; color: #fff;
+  box-shadow: 0 10px 40px -10px rgba(253,78,23,.6);
+}
+.btn.principal::before { background: radial-gradient(220px circle at var(--x) var(--y), rgba(255,255,255,.22), transparent 60%); }
+.btn.principal::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; z-index: -1;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: skewX(-20deg);
+  animation: reflexo 4.5s ease-in-out 1.6s infinite;
+}
+@keyframes reflexo { 0% { left: -60%; } 30%, 100% { left: 130%; } }
+.btn.principal:hover { box-shadow: 0 14px 48px -8px rgba(253,78,23,.8); background: var(--gradiente); }
+.btn.principal .ico { background: rgba(0,0,0,.18); color: #fff; }
+.btn.principal .seta { opacity: .9; }
+
+/* ---------- Rodapé ---------- */
+
+footer {
+  position: relative; z-index: 1; text-align: center;
+  font-size: 14px; letter-spacing: .01em; color: rgba(254,255,255,.5);
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+footer b { font-weight: 800; }
+.social {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+  color: var(--texto); border: 1px solid rgba(255,122,33,.3); background: rgba(255,255,255,.03);
+  transition: color .2s ease, border-color .2s ease, transform .2s var(--curva);
+}
+.social:hover { color: var(--laranja-2); border-color: var(--laranja-2); transform: translateY(-2px); }
+.social:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* ---------- Entrada escalonada ---------- */
+
+.entra {
+  opacity: 0; transform: translateY(18px);
+  animation: entra .8s var(--curva) forwards;
+  animation-delay: calc(var(--d, 0) * 90ms + 80ms);
+}
+@keyframes entra { to { opacity: 1; transform: none; } }
+
+/* ---------- Página 404 ---------- */
+
+.erro-codigo {
+  font-weight: 800; font-size: clamp(88px, 22vw, 160px); line-height: 1;
+  background: var(--gradiente); -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin-top: 32px;
+}
+
+/* ---------- Menos movimento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; }
+  .entra { opacity: 1; transform: none; }
+  .btn, .btn .seta { transition: none; }
+  .btn:hover { transform: none; }
+  .rotativo .palavra, .rotativo .palavra.saindo { transform: none; transition: opacity .3s ease; }
+}
