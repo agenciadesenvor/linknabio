@@ -2,6 +2,14 @@
    Desenvor Digital — link na bio
    ========================================================== */
 
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/manrope-latin.woff2') format('woff2');
+}
+
 :root {
   --laranja: #fd4e17;
   --laranja-2: #ff7a21;
@@ -38,7 +46,7 @@ body {
 
 /* Grade fina que some para as bordas */
 .grade {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  position: absolute; top: 0; left: 0; right: 0; height: 900px; pointer-events: none; z-index: 0;
   background-image:
     linear-gradient(to right, rgba(255,122,33,.07) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,122,33,.07) 1px, transparent 1px);
@@ -48,22 +56,15 @@ body {
           mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 20%, transparent 80%);
 }
 
-/* Brilho laranja no topo, respirando devagar */
+/* Brilho laranja no topo: gradientes radiais já "desfocados",
+   sem filter: blur (que pesa muito no celular) */
 .brilho {
-  position: absolute; top: 0; left: 0; right: 0; height: 560px;
-  pointer-events: none; z-index: 0; overflow: hidden;
-}
-.brilho span {
-  position: absolute; border-radius: 50%;
-  background: var(--gradiente); opacity: .42; filter: blur(120px);
-  animation: respira 9s ease-in-out infinite alternate;
-}
-.brilho span:nth-child(1) { width: 44vw; height: 300px; top: -200px; right: 5%; }
-.brilho span:nth-child(2) { width: 44vw; height: 300px; top: -260px; left: 35%; animation-delay: -3s; }
-.brilho span:nth-child(3) { width: 44vw; height: 300px; top: -240px; left: 2%; mix-blend-mode: plus-lighter; animation-delay: -6s; }
-@keyframes respira {
-  from { transform: translate3d(0, 0, 0) scale(1); opacity: .34; }
-  to   { transform: translate3d(0, 30px, 0) scale(1.12); opacity: .5; }
+  position: absolute; top: 0; left: 0; right: 0; height: 620px;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(38% 60% at 78% 0%, rgba(253,78,23,.5), transparent 70%),
+    radial-gradient(40% 65% at 55% 0%, rgba(255,122,33,.45), transparent 70%),
+    radial-gradient(38% 60% at 22% 0%, rgba(253,78,23,.45), transparent 70%);
 }
 
 /* ---------- Barra do topo ---------- */
@@ -98,8 +99,9 @@ main {
 }
 .avatar::before {
   content: ""; position: absolute; inset: -3px; border-radius: 50%; z-index: -2;
-  background: conic-gradient(from var(--giro, 0deg), var(--laranja) 0deg, #ff9a4d 60deg, rgba(253,78,23,.25) 160deg, var(--laranja) 360deg);
+  background: conic-gradient(var(--laranja) 0deg, #ff9a4d 60deg, rgba(253,78,23,.25) 160deg, var(--laranja) 360deg);
   animation: gira 6s linear infinite;
+  will-change: transform;
 }
 .avatar::after {
   content: ""; position: absolute; inset: 0; border-radius: 50%; z-index: -1;
@@ -107,8 +109,7 @@ main {
   box-shadow: 0 0 60px rgba(253,78,23,.28);
 }
 .avatar img { width: 50%; height: auto; display: block; }
-@property --giro { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-@keyframes gira { to { --giro: 360deg; } }
+@keyframes gira { to { transform: rotate(360deg); } }
 
 .nome {
   font-weight: 700; font-size: clamp(18px, 2.6vw, 24px); color: #fff; margin-top: 29px;
@@ -164,7 +165,6 @@ h1 .junto { white-space: nowrap; }
   color: var(--texto);
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,122,33,.35);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   transition: transform .2s var(--curva), border-color .2s ease, background .2s ease, box-shadow .2s ease;
   -webkit-tap-highlight-color: transparent;
 }
@@ -194,12 +194,16 @@ h1 .junto { white-space: nowrap; }
 }
 .btn.principal::before { background: radial-gradient(220px circle at var(--x) var(--y), rgba(255,255,255,.22), transparent 60%); }
 .btn.principal::after {
-  content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; z-index: -1;
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; z-index: -1;
   background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
-  transform: skewX(-20deg);
-  animation: reflexo 4.5s ease-in-out 1.6s infinite;
+  transform: translateX(-150%) skewX(-20deg);
+  animation: reflexo 4.5s ease-in-out 1.2s infinite;
+  will-change: transform;
 }
-@keyframes reflexo { 0% { left: -60%; } 30%, 100% { left: 130%; } }
+@keyframes reflexo {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  30%, 100% { transform: translateX(330%) skewX(-20deg); }
+}
 .btn.principal:hover { box-shadow: 0 14px 48px -8px rgba(253,78,23,.8); background: var(--gradiente); }
 .btn.principal .ico { background: rgba(0,0,0,.18); color: #fff; }
 .btn.principal .seta { opacity: .9; }
@@ -224,9 +228,9 @@ footer b { font-weight: 800; }
 /* ---------- Entrada escalonada ---------- */
 
 .entra {
-  opacity: 0; transform: translateY(18px);
-  animation: entra .8s var(--curva) forwards;
-  animation-delay: calc(var(--d, 0) * 90ms + 80ms);
+  opacity: 0; transform: translateY(12px);
+  animation: entra .55s var(--curva) forwards;
+  animation-delay: calc(var(--d, 0) * 45ms);
 }
 @keyframes entra { to { opacity: 1; transform: none; } }
 
