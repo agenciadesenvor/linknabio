@@ -192,6 +192,26 @@ h1 .junto { white-space: nowrap; }
 .btn .seta { flex: none; opacity: .6; transition: transform .2s var(--curva), opacity .2s ease; }
 .btn:hover .seta { transform: translateX(4px); opacity: 1; }
 
+/* Botões escuros ficam laranja ao passar o mouse (e ao tocar, no celular).
+   O gradiente fica numa camada que aparece aos poucos, já que o
+   navegador não anima a troca de um gradiente direto. */
+.btn:not(.principal)::after {
+  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background: var(--gradiente);
+  opacity: 0; transition: opacity .25s ease;
+}
+.btn:not(.principal) .ico { transition: background .25s ease, color .25s ease; }
+.btn:not(.principal):hover,
+.btn:not(.principal):active {
+  color: #fff; border-color: transparent;
+  box-shadow: 0 10px 40px -10px rgba(253,78,23,.6);
+}
+.btn:not(.principal):hover::after,
+.btn:not(.principal):active::after { opacity: 1; }
+.btn:not(.principal):hover::before { background: radial-gradient(220px circle at var(--x) var(--y), rgba(255,255,255,.22), transparent 60%); }
+.btn:not(.principal):hover .ico:not(.ico-logo),
+.btn:not(.principal):active .ico:not(.ico-logo) { background: rgba(0,0,0,.18); color: #fff; }
+
 /* Principal: gradiente + reflexo passando */
 .btn.principal {
   background: var(--gradiente); border-color: transparent; color: #fff;
