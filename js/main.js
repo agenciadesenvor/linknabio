@@ -36,6 +36,76 @@
     });
   }
 
+  // Faixa da logo (LogoLoop do React Bits, versão sem React):
+  // move sem parar, desacelera suave no hover e só anima quando está visível
+  var loop = document.querySelector('.logoloop');
+  if (loop) {
+    var trilho = loop.querySelector('.logoloop__track');
+    var lista = trilho.querySelector('.logoloop__list');
+    var VELOCIDADE = 45, VELOCIDADE_HOVER = 12, SUAVIZACAO = 0.25;
+    var larguraSeq = 0, deslocamento = 0, velocidade = VELOCIDADE;
+    var emHover = false, visivel = true, ultimo = null, quadro = null;
+
+    // Repete o item e as cópias até cobrir a tela com folga
+    function montarLoop() {
+      var item = lista.querySelector('.logoloop__item');
+      while (lista.children.length > 1) lista.removeChild(lista.lastChild);
+      var larguraItem = item.getBoundingClientRect().width +
+        parseFloat(getComputedStyle(item).marginRight);
+      if (!larguraItem) return;
+      var porLista = Math.max(1, Math.ceil(loop.clientWidth / larguraItem));
+      for (var n = 1; n < porLista; n++) {
+        var c = item.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        lista.appendChild(c);
+      }
+      trilho.querySelectorAll('.logoloop__list[data-copia]').forEach(function (l) { l.remove(); });
+      var copia = lista.cloneNode(true);
+      copia.setAttribute('data-copia', '');
+      copia.setAttribute('aria-hidden', 'true');
+      trilho.appendChild(copia);
+      larguraSeq = lista.getBoundingClientRect().width;
+    }
+
+    function animar(t) {
+      if (ultimo === null) ultimo = t;
+      var dt = Math.min(0.1, Math.max(0, t - ultimo) / 1000);
+      ultimo = t;
+      var alvo = emHover ? VELOCIDADE_HOVER : VELOCIDADE;
+      velocidade += (alvo - velocidade) * (1 - Math.exp(-dt / SUAVIZACAO));
+      if (larguraSeq > 0) {
+        deslocamento = (deslocamento + velocidade * dt) % larguraSeq;
+        trilho.style.transform = 'translate3d(' + (-deslocamento) + 'px,0,0)';
+      }
+      quadro = requestAnimationFrame(animar);
+    }
+    function iniciar() { if (quadro === null && visivel && !document.hidden) quadro = requestAnimationFrame(animar); }
+    function parar() { if (quadro !== null) cancelAnimationFrame(quadro); quadro = null; ultimo = null; }
+
+    var img = lista.querySelector('img');
+    function preparar() { montarLoop(); if (!semMovimento) iniciar(); }
+    if (img.complete) preparar(); else img.addEventListener('load', preparar, { once: true });
+    if (document.fonts) document.fonts.ready.then(montarLoop);
+
+    var redimensionar;
+    addEventListener('resize', function () {
+      clearTimeout(redimensionar);
+      redimensionar = setTimeout(montarLoop, 150);
+    });
+
+    if (!semMovimento) {
+      trilho.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') emHover = true; });
+      trilho.addEventListener('pointerleave', function () { emHover = false; });
+      document.addEventListener('visibilitychange', function () { document.hidden ? parar() : iniciar(); });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entradas) {
+          visivel = entradas[0].isIntersecting;
+          visivel ? iniciar() : parar();
+        }).observe(loop);
+      }
+    }
+  }
+
   // Registro de cliques: dispara para o Pixel da Meta / Google, se estiverem instalados
   document.querySelectorAll('[data-evento]').forEach(function (el) {
     el.addEventListener('click', function () {
