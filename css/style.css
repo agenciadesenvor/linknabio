@@ -239,16 +239,13 @@ footer b { font-weight: 800; }
 /* ---------- Faixa da logo (LogoLoop) ---------- */
 
 .logoloop {
-  --logoloop-gap: 56px;
-  --logoloop-altura: 30px;
+  --logoloop-gap: 72px;
+  --logoloop-altura: 32px;
   --logoloop-fade: var(--fundo);
   position: relative; z-index: 1;
   width: 100%; overflow: hidden;
   padding: 22px 0;
   margin-top: 8px;
-  border-top: 1px solid rgba(255,122,33,.14);
-  border-bottom: 1px solid rgba(255,122,33,.14);
-  background: linear-gradient(180deg, rgba(253,78,23,.05), rgba(253,78,23,0) 70%);
 }
 .logoloop__track {
   display: flex; width: max-content;
@@ -257,18 +254,14 @@ footer b { font-weight: 800; }
 .logoloop__list { display: flex; align-items: center; list-style: none; }
 .logoloop__item {
   flex: 0 0 auto; margin-right: var(--logoloop-gap);
-  display: inline-flex; align-items: center; gap: 14px;
-  font-weight: 800; font-size: calc(var(--logoloop-altura) * .6);
-  letter-spacing: .14em; line-height: 1; white-space: nowrap;
-  color: rgba(243,243,243,.4);
-  transition: color .3s ease;
+  display: inline-flex; align-items: center; line-height: 1;
 }
 .logoloop__item img {
   height: var(--logoloop-altura); width: auto; display: block;
   -webkit-user-drag: none; pointer-events: none;
+  filter: brightness(0) invert(1); /* logo em branco */
   transition: transform .3s var(--curva);
 }
-.logoloop__item:hover { color: #fff; }
 .logoloop__item:hover img { transform: scale(1.15); }
 
 /* Fade nas bordas */
