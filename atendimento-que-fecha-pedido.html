@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Atendimento que fecha pedido | Desenvor</title>
+  <meta name="description" content="Por que a lojista chama, recebe o catálogo e some. O método completo com 5 cadências prontas, baseado em 1.054 conversas reais de distribuidoras de atacado." />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#FBF9F7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#15120F" media="(prefers-color-scheme: dark)" />
+  <link rel="canonical" href="https://bio.desenvor.com.br/atendimento-que-fecha-pedido" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Desenvor Digital" />
+  <meta property="og:url" content="https://bio.desenvor.com.br/atendimento-que-fecha-pedido" />
+  <meta property="og:title" content="Atendimento que fecha pedido | Desenvor" />
+  <meta property="og:description" content="Por que a lojista chama, recebe o catálogo e some. 5 cadências prontas pra copiar, baseadas em 1.054 conversas reais." />
+  <meta property="og:image" content="https://bio.desenvor.com.br/assets/og-atendimento.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+  <style>
+    /* Fontes do Google Fonts, hospedadas no próprio site */
+    @font-face {
+      font-family: 'Sora'; font-style: normal; font-weight: 600 800; font-display: swap;
+      src: url('/fonts/sora-latin.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap;
+      src: url('/fonts/inter-latin.woff2') format('woff2');
+    }
+
+    /* ---------- Tokens: claro ---------- */
+    :root {
+      --bg: #FBF9F7;
+      --surface: #FFFFFF;
+      --surface-2: #F4F0EC;
+      --ink: #1A1512;
+      --ink-soft: #5C534C;
+      --ink-faint: #8B8078;
+      --line: #E6DFD8;
+      --accent: #EA580C;
+      --accent-soft: #FB923C;
+      --accent-wash: #FFF2E8;
+      --bad: #B91C1C;
+      --bad-wash: #FDECEC;
+      --good: #15803D;
+      --good-wash: #EAF6EE;
+      /* bloco do CTA: sempre escuro */
+      --cta-bg: #15120F;
+      --cta-ink: #F3EEE8;
+      --cta-ink-soft: #BDB2A7;
+      --on-accent: #FFFFFF;
+
+      --display: 'Sora', system-ui, -apple-system, sans-serif;
+      --corpo: 'Inter', system-ui, -apple-system, sans-serif;
+      color-scheme: light;
+    }
+
+    /* ---------- Tokens: escuro ---------- */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #15120F; --surface: #1E1A16; --surface-2: #272119;
+        --ink: #F3EEE8; --ink-soft: #BDB2A7; --ink-faint: #8C8277;
+        --line: #332C24; --accent: #FB923C; --accent-soft: #FDBA74;
+        --accent-wash: #2A1A0D;
+        --bad: #F87171; --bad-wash: #2C1616;
+        --good: #4ADE80; --good-wash: #14241A;
+        --cta-bg: #0E0B09; --on-accent: #1A1512;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #15120F; --surface: #1E1A16; --surface-2: #272119;
+      --ink: #F3EEE8; --ink-soft: #BDB2A7; --ink-faint: #8C8277;
+      --line: #332C24; --accent: #FB923C; --accent-soft: #FDBA74;
+      --accent-wash: #2A1A0D;
+      --bad: #F87171; --bad-wash: #2C1616;
+      --good: #4ADE80; --good-wash: #14241A;
+      --cta-bg: #0E0B09; --on-accent: #1A1512;
+      color-scheme: dark;
+    }
+
+    /* ---------- Base ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 24px; }
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: var(--corpo); font-size: 17px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: var(--on-accent); }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+    strong { font-weight: 700; color: var(--ink); }
+    em { font-style: italic; }
+    .num { font-variant-numeric: tabular-nums; }
+
+    .coluna { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+    /* Barra de progresso de leitura */
+    .progresso {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 50;
+      background: var(--accent); transform-origin: 0 50%; transform: scaleX(0);
+    }
+
+    /* ---------- Topo ---------- */
+    .topo { padding: 20px 0 0; }
+    .topo a { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 15px; }
+    .topo img { width: 28px; height: auto; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 48px 0 32px; }
+    .tarja {
+      display: inline-block; font-family: var(--display); font-weight: 700;
+      font-size: 12px; letter-spacing: .12em; color: var(--accent);
+      background: var(--accent-wash); padding: 6px 12px; border-radius: 999px;
+    }
+    h1, h2, h3, h4 { font-family: var(--display); color: var(--ink); text-wrap: balance; letter-spacing: -.02em; }
+    h1 { font-size: clamp(36px, 8vw, 56px); line-height: 1.05; font-weight: 800; margin-top: 20px; }
+    .subtitulo { font-size: clamp(18px, 2.4vw, 20px); color: var(--ink-soft); margin-top: 18px; text-wrap: pretty; }
+    .meta {
+      display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 24px;
+      font-size: 14px; color: var(--ink-faint); list-style: none;
+    }
+    .meta li { display: inline-flex; align-items: center; gap: 7px; }
+    .meta svg { color: var(--accent); flex: none; }
+
+    /* ---------- Sumário ---------- */
+    .sumario { background: var(--surface-2); border-radius: 16px; padding: 24px; margin-bottom: 8px; }
+    .sumario h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
+    .sumario ol { list-style: none; counter-reset: s; margin-top: 12px; display: grid; gap: 2px; }
+    .sumario li { counter-increment: s; }
+    .sumario a {
+      display: flex; gap: 12px; align-items: baseline; padding: 7px 8px; margin: 0 -8px;
+      color: var(--ink); text-decoration: none; border-radius: 8px; font-weight: 500;
+      transition: background .15s ease, color .15s ease;
+    }
+    .sumario a::before {
+      content: counter(s, decimal-leading-zero); font-family: var(--display); font-weight: 700;
+      font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; flex: none;
+    }
+    .sumario a:hover { background: var(--surface); color: var(--accent); }
+
+    /* ---------- Partes ---------- */
+    .parte { padding: 48px 0 8px; }
+    .rotulo-parte {
+      font-family: var(--display); font-weight: 700; font-size: 13px;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+    }
+    .parte > h2 { font-size: clamp(28px, 5.4vw, 38px); line-height: 1.12; font-weight: 800; margin-top: 8px; margin-bottom: 20px; }
+    .parte h3 { font-size: clamp(20px, 3.4vw, 23px); line-height: 1.25; font-weight: 700; margin: 36px 0 12px; }
+    .parte p { margin-top: 14px; text-wrap: pretty; }
+    .parte > p:first-of-type { margin-top: 0; }
+    .destaque-frase { font-family: var(--display); font-size: clamp(20px, 3.6vw, 24px); font-weight: 700; line-height: 1.3; letter-spacing: -.01em; margin-top: 18px; }
+    hr { border: 0; height: 1px; background: var(--line); margin: 40px 0 0; }
+
+    /* ---------- Tiles de número ---------- */
+    .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+    .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; }
+    .tile b {
+      display: block; font-family: var(--display); font-weight: 800; color: var(--accent);
+      font-size: clamp(32px, 7vw, 46px); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums;
+    }
+    .tile span { display: block; font-size: 14px; line-height: 1.4; color: var(--ink-soft); margin-top: 10px; }
+
+    /* ---------- Funil ---------- */
+    .funil { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin: 28px 0 8px; }
+    .funil-titulo { font-family: var(--display); font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+    .funil ol { list-style: none; display: grid; gap: 10px; }
+    .funil li { display: grid; grid-template-columns: 130px 1fr 48px; align-items: center; gap: 12px; font-size: 14px; }
+    .funil .nome { color: var(--ink-soft); line-height: 1.3; }
+    .funil .trilha { display: block; height: 26px; background: var(--surface-2); border-radius: 6px; overflow: hidden; }
+    .funil .barra {
+      display: block; height: 100%; width: var(--w); min-width: 6px; border-radius: 6px;
+      background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+      transform-origin: 0 50%; transition: transform 1s cubic-bezier(.22,1,.36,1);
+    }
+    .funil.anima .barra { transform: scaleX(0); }
+    .funil li:nth-child(2) .barra { transition-delay: .08s; }
+    .funil li:nth-child(3) .barra { transition-delay: .16s; }
+    .funil li:nth-child(4) .barra { transition-delay: .24s; }
+    .funil li:nth-child(5) .barra { transition-delay: .32s; }
+    .funil .zero .barra { background: var(--bad); }
+    .funil .pct { font-family: var(--display); font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+    .funil .zero .pct, .funil .zero .nome { color: var(--bad); font-weight: 700; }
+    .fonte { font-size: 13px; color: var(--ink-faint); margin-top: 10px; }
+
+    /* ---------- Conversa (padrão) ---------- */
+    .conversa { background: var(--surface-2); border-radius: 16px; padding: 18px; margin: 20px 0; display: grid; gap: 10px; }
+    .balao { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.45; }
+    .balao small { display: block; font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 3px; }
+    .balao.ela { background: var(--surface); border: 1px solid var(--line); border-top-left-radius: 4px; }
+    .balao.loja { justify-self: end; background: var(--accent-wash); border-top-right-radius: 4px; }
+    .balao.sumiu { background: var(--bad-wash); color: var(--bad); border: 1px dashed var(--bad); font-style: italic; border-top-left-radius: 4px; }
+    .balao.sumiu small { color: var(--bad); }
+
+    /* ---------- Callout ---------- */
+    .callout {
+      display: flex; gap: 14px; background: var(--accent-wash); border-radius: 14px;
+      padding: 18px 20px; margin: 24px 0; font-size: 16px; line-height: 1.6;
+    }
+    .callout svg { flex: none; color: var(--accent); margin-top: 3px; }
+    .callout p { margin: 0 !important; }
+
+    /* ---------- Lista de regras ---------- */
+    .regras { list-style: none; counter-reset: r; display: grid; gap: 22px; margin-top: 24px; }
+    .regras li { counter-increment: r; display: grid; grid-template-columns: 40px 1fr; gap: 16px; }
+    .regras li::before {
+      content: counter(r); display: grid; place-items: center; width: 40px; height: 40px;
+      border-radius: 10px; background: var(--accent-wash); color: var(--accent);
+      font-family: var(--display); font-weight: 800; font-size: 17px;
+    }
+    .regras b { display: block; font-family: var(--display); font-weight: 700; font-size: 18px; line-height: 1.3; letter-spacing: -.01em; }
+    .regras span { display: block; color: var(--ink-soft); font-size: 16px; margin-top: 4px; line-height: 1.55; }
+
+    /* ---------- Mensagem pronta / errada ---------- */
+    .msg {
+      background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+      border-radius: 6px 14px 14px 6px; padding: 14px 16px 16px; margin: 14px 0;
+    }
+    .msg-topo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+    .msg-quando { font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+    .pilula { font-size: 12px; font-weight: 600; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; line-height: 1.5; }
+    .copiar {
+      margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+      font: 600 13px/1 var(--corpo); color: var(--accent); background: var(--accent-wash);
+      border: 0; border-radius: 999px; padding: 8px 12px; min-height: 34px; cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+    }
+    .copiar:hover { background: var(--accent); color: var(--on-accent); }
+    .copiar.ok { background: var(--good-wash); color: var(--good); }
+    .msg-texto { white-space: pre-wrap; font-size: 16px; line-height: 1.55; color: var(--ink); }
+    .msg .nota { font-size: 14px; color: var(--ink-soft); margin-top: 8px; }
+    .msg.errada { border-left-color: var(--bad); background: var(--bad-wash); }
+    .msg.errada .msg-quando { color: var(--bad); }
+
+    /* ---------- Card de cadência ---------- */
+    .cadencia { background: var(--surface-2); border-radius: 18px; padding: 22px 18px 10px; margin: 28px 0; }
+    .cadencia h4 { font-size: 20px; line-height: 1.25; font-weight: 700; }
+    .cadencia h4 span { display: block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+    .quando-usar { font-size: 15px; color: var(--ink-soft); margin: 8px 0 16px !important; }
+    .quando-usar b { color: var(--ink); }
+    .cadencia .callout { background: var(--surface); }
+
+    /* ---------- Comparação ---------- */
+    .compara { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+    .lado { border-radius: 16px; padding: 18px; font-size: 16px; line-height: 1.55; }
+    .lado h4 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .lado.ruim { background: var(--bad-wash); }
+    .lado.ruim h4 { color: var(--bad); }
+    .lado.bom { background: var(--good-wash); }
+    .lado.bom h4 { color: var(--good); }
+    .lado .efeito { font-style: italic; color: var(--ink-soft); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+
+    /* ---------- Tabelas ---------- */
+    .tabela { overflow-x: auto; margin: 24px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; min-width: 560px; }
+    th, td { text-align: left; padding: 12px 14px; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { font-family: var(--display); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); background: var(--surface-2); font-weight: 700; }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { font-weight: 700; }
+    td:last-child { color: var(--ink-soft); }
+
+    /* ---------- Linha do tempo ---------- */
+    .linha-tempo { list-style: none; margin: 24px 0; display: grid; }
+    .linha-tempo li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; position: relative; padding-bottom: 24px; }
+    .linha-tempo li:not(:last-child)::after { content: ""; position: absolute; left: 31px; top: 34px; bottom: 4px; width: 2px; background: var(--line); }
+    .linha-tempo .dia {
+      font-family: var(--display); font-weight: 800; font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent-wash); border-radius: 10px; height: 34px;
+      display: grid; place-items: center; font-variant-numeric: tabular-nums; position: relative; z-index: 1;
+    }
+    .linha-tempo b { display: block; font-family: var(--display); font-size: 18px; line-height: 1.3; padding-top: 4px; }
+    .linha-tempo span { display: block; color: var(--ink-soft); font-size: 16px; margin-top: 4px; }
+
+    /* ---------- CTA ---------- */
+    .cta {
+      background: var(--cta-bg); color: var(--cta-ink); border-radius: 22px;
+      padding: clamp(28px, 6vw, 44px); margin: 36px 0 0; position: relative; overflow: hidden; isolation: isolate;
+    }
+    .cta::before {
+      content: ""; position: absolute; inset: auto -20% 55% -20%; height: 280px; z-index: -1;
+      background: radial-gradient(50% 60% at 50% 0%, rgba(253,78,23,.35), transparent 70%);
+    }
+    .cta h2 { color: var(--cta-ink); font-size: clamp(26px, 5vw, 34px); line-height: 1.15; font-weight: 800; }
+    .cta p { color: var(--cta-ink-soft); margin-top: 14px; }
+    .botao {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 24px;
+      min-height: 56px; padding: 14px 28px; border-radius: 999px;
+      background: linear-gradient(90deg, #ff7a21, #fd4e17); color: #fff; text-decoration: none;
+      font-family: var(--display); font-weight: 700; font-size: 17px; white-space: nowrap;
+      box-shadow: 0 12px 40px -12px rgba(253,78,23,.7);
+      transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s ease;
+    }
+    .botao:hover { transform: translateY(-2px); box-shadow: 0 16px 48px -10px rgba(253,78,23,.85); }
+    .botao:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .assinatura { font-size: 14px; color: var(--cta-ink-soft); margin-top: 24px; display: flex; align-items: center; gap: 10px; }
+    .assinatura img { width: 26px; height: auto; flex: none; }
+
+    /* ---------- Rodapé ---------- */
+    .rodape { padding: 40px 20px calc(48px + env(safe-area-inset-bottom)); font-size: 14px; color: var(--ink-faint); line-height: 1.6; }
+    .rodape strong { color: var(--ink-soft); }
+    .rodape .voltar { display: inline-block; margin-top: 18px; font-weight: 600; }
+
+    /* ---------- Celular ---------- */
+    @media (max-width: 600px) {
+      .tiles { gap: 8px; }
+      .tile { padding: 14px 10px; }
+      .tile b { font-size: 30px; }
+      .tile span { font-size: 12.5px; line-height: 1.35; hyphens: auto; }
+      .funil li { grid-template-columns: 96px 1fr 40px; gap: 8px; font-size: 13px; }
+      .compara { grid-template-columns: 1fr; }
+      .linha-tempo li { grid-template-columns: 56px 1fr; gap: 14px; }
+      .linha-tempo li:not(:last-child)::after { left: 27px; }
+      .botao { width: 100%; padding: 14px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .funil.anima .barra { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progresso" aria-hidden="true"></div>
+
+  <header class="topo coluna">
+    <a href="/"><img src="/assets/logo.svg" width="250" height="193" alt="" />Desenvor Digital</a>
+  </header>
+
+  <main class="coluna">
+    <!-- Hero -->
+    <section class="hero">
+      <span class="tarja">MATERIAL GRATUITO · DESENVOR</span>
+      <h1>Atendimento que fecha pedido</h1>
+      <p class="subtitulo">Por que a lojista chama, recebe o catálogo e some. O que fazer em cada toque, as cinco cadências prontas pra copiar e as cinco métricas que mostram onde a sua conversa está morrendo.</p>
+      <ul class="meta">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Leitura de 18 minutos</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Baseado em <span class="num">1.054</span> conversas reais</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-2 11H5z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg>Para quem vende no atacado</li>
+      </ul>
+    </section>
+
+    <!-- Sumário -->
+    <nav class="sumario" aria-labelledby="sumario-titulo">
+      <h2 id="sumario-titulo">Neste material</h2>
+      <ol>
+        <li><a href="#parte-1">O buraco de 1.054 conversas</a></li>
+        <li><a href="#parte-2">As sete regras do atendimento no atacado</a></li>
+        <li><a href="#parte-3">O catálogo separado</a></li>
+        <li><a href="#parte-4">O código da peça</a></li>
+        <li><a href="#parte-5">As cinco cadências</a></li>
+        <li><a href="#parte-6">Quando trocar o texto pelo áudio</a></li>
+        <li><a href="#parte-7">Como medir se está funcionando</a></li>
+        <li><a href="#parte-8">Implantação em uma semana</a></li>
+        <li><a href="#parte-9">Próximo passo</a></li>
+      </ol>
+    </nav>
+
+    <!-- PARTE 1 -->
+    <section class="parte" id="parte-1" aria-labelledby="t1">
+      <p class="rotulo-parte">Parte 1</p>
+      <h2 id="t1">O buraco de 1.054 conversas</h2>
+      <p>A gente abriu as conversas de WhatsApp de quatro distribuidoras diferentes pra entender uma coisa que todo cliente nosso falava com as mesmas palavras: <strong>"tá chegando gente, mas não tá vendendo"</strong>.</p>
+      <p>Quatro negócios, quatro nichos, nenhuma relação entre eles. Lingerie, moda fitness, jeans e moda feminina. Somando tudo, <span class="num">1.054</span> conversas.</p>
+      <p>O resultado foi igual nas quatro.</p>
+
+      <div class="tiles">
+        <div class="tile"><b>1.054</b><span>conversas analisadas em 4 distribuidoras</span></div>
+        <div class="tile"><b>0</b><span>chegaram na quinta mensagem</span></div>
+        <div class="tile"><b>1</b><span>pessoa bloqueou, em 1.054</span></div>
+      </div>
+
+      <figure class="funil" aria-labelledby="funil-titulo">
+        <figcaption class="funil-titulo" id="funil-titulo">Onde a conversa morre</figcaption>
+        <ol>
+          <li><span class="nome">Chamou no WhatsApp</span><span class="trilha"><span class="barra" style="--w:100%"></span></span><span class="pct">100%</span></li>
+          <li><span class="nome">Recebeu resposta</span><span class="trilha"><span class="barra" style="--w:96%"></span></span><span class="pct">96%</span></li>
+          <li><span class="nome">Passou do "oi"</span><span class="trilha"><span class="barra" style="--w:38%"></span></span><span class="pct">38%</span></li>
+          <li><span class="nome">Recebeu o catálogo</span><span class="trilha"><span class="barra" style="--w:21%"></span></span><span class="pct">21%</span></li>
+          <li class="zero"><span class="nome">5ª mensagem</span><span class="trilha"><span class="barra" style="--w:0%"></span></span><span class="pct">0%</span></li>
+        </ol>
+        <p class="fonte">Fonte: 1.054 conversas em 4 contas de anúncio gerenciadas pela Desenvor.</p>
+      </figure>
+
+      <p>Repara no degrau entre "recebeu o catálogo" e "quinta mensagem". É ali que o dinheiro some. Não no anúncio, não no preço, não no frete.</p>
+
+      <h3>E antes que você pense que é público ruim</h3>
+      <p>Essa é a primeira reação de todo mundo, e a gente achou que seria isso também. Mas o número que mata essa tese é o do bloqueio.</p>
+      <p class="destaque-frase">Em 1.054 conversas, uma pessoa bloqueou.</p>
+      <p>Quem não tem interesse nenhum bloqueia, denuncia ou nem responde. As suas responderam. Perguntaram preço, pediram o catálogo, disseram que iam ver com calma. Isso é gente com intenção de compra, não curioso.</p>
+      <p>O público chegou certo. A conversa é que não soube o que fazer com ele.</p>
+
+      <h3>O padrão, sempre igual</h3>
+      <p>Em praticamente todas as 1.054, a sequência foi essa:</p>
+      <div class="conversa" role="group" aria-label="Exemplo de conversa">
+        <p class="balao ela"><small>A lojista</small>Oi, boa tarde! Vi o anúncio de vocês</p>
+        <p class="balao loja"><small>A loja</small>Oi! Tudo bem? Vou te mandar nosso catálogo 😊</p>
+        <p class="balao loja"><small>A loja</small>[PDF com 80 peças]</p>
+        <p class="balao sumiu"><small>A lojista</small>(nunca mais respondeu)</p>
+      </div>
+      <p>Agora imagina a cena do outro lado. Ela está no caixa da loja dela, atendendo cliente, com o celular na mão. Abre um PDF de 80 peças, rola três telas, não consegue decidir nada ali, pensa <em>"depois eu vejo com calma"</em> e volta pro trabalho.</p>
+      <p>Nunca mais volta. Não porque desistiu. Porque esqueceu.</p>
+      <aside class="callout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><p>O problema não é falta de lembrete. É que decidir ficou difícil. Por isso mandar "oi, viu o catálogo?" três vezes não resolve nada: você está lembrando ela de uma tarefa que continua trabalhosa do mesmo jeito.</p></aside>
+      <hr />
+    </section>
+
+    <!-- PARTE 2 -->
+    <section class="parte" id="parte-2" aria-labelledby="t2">
+      <p class="rotulo-parte">Parte 2</p>
+      <h2 id="t2">As sete regras do atendimento no atacado</h2>
+      <p>Valem pra qualquer peça, qualquer ticket e qualquer tamanho de operação. Antes de montar cadência, acerta essas sete.</p>
+      <ol class="regras">
+        <li><div><b>Responda em minutos, não em horas.</b><span>A lojista está cotando com três fornecedores ao mesmo tempo. Quem responde primeiro define o pedido. Se o seu anúncio roda de madrugada, deixe uma mensagem automática que já pergunta a categoria.</span></div></li>
+        <li><div><b>Uma pergunta por mensagem.</b><span>Duas perguntas juntas viram zero resposta. Ela responde a última e esquece a primeira, ou não responde nenhuma.</span></div></li>
+        <li><div><b>Nunca mande o catálogo inteiro de primeira.</b><span>Catálogo grande não é generosidade, é transferir o trabalho pra ela. Pergunte a categoria antes e mande só aquela parte.</span></div></li>
+        <li><div><b>Toda peça precisa de um código.</b><span>Sem código, pedir dá trabalho. Com código, ela manda três números e o pedido está montado.</span></div></li>
+        <li><div><b>Preço só depois da categoria.</b><span>Quem abre com tabela de preço vira comparação. Quem abre com "o que você procura" vira conversa.</span></div></li>
+        <li><div><b>Nunca termine a conversa na mão dela.</b><span>Toda mensagem sua fecha com uma pergunta ou com um próximo passo com data. "Qualquer coisa estou à disposição" é o fim da conversa.</span></div></li>
+        <li><div><b>Pare com dignidade.</b><span>A última mensagem da cadência encerra sem cobrança e deixa a porta aberta. Quem some hoje compra daqui a três meses, se você não tiver queimado a relação.</span></div></li>
+      </ol>
+      <hr />
+    </section>
+
+    <!-- PARTE 3 -->
+    <section class="parte" id="parte-3" aria-labelledby="t3">
+      <p class="rotulo-parte">Parte 3</p>
+      <h2 id="t3">O catálogo separado</h2>
+      <p>Essa é a mudança que mais muda número, e não custa nada além de reorganizar o que você já tem.</p>
+      <p>Em vez de um PDF único com tudo, você quebra o catálogo em blocos por categoria. Antes de mandar qualquer coisa, pergunta o que ela procura. Aí manda só aquele bloco.</p>
+
+      <div class="compara">
+        <div class="lado ruim">
+          <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Como é hoje</h4>
+          <p>"Vou te mandar nosso catálogo" + PDF com 80 peças de todas as linhas.</p>
+          <p class="efeito">Ela rola 3 telas, não decide, fecha e esquece.</p>
+        </div>
+        <div class="lado bom">
+          <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Como deveria ser</h4>
+          <p>"O que você procura: legging, top ou conjunto?" Ela responde. Você manda o bloco com 15 peças daquela categoria.</p>
+          <p class="efeito">Ela vê 15 peças do que já quer e escolhe na hora.</p>
+        </div>
+      </div>
+
+      <h3>Como dividir</h3>
+      <p>Use as categorias que a sua cliente usa, não as que o seu sistema usa. Se ela fala "shortinho", o bloco chama shortinho, não "bermuda feminina linha verão".</p>
+      <p>Entre <strong>12 e 20 peças por bloco</strong>. Menos que isso parece pouca variedade, mais que isso volta a ser difícil de decidir.</p>
+      <p>Se você tem muita peça numa categoria só, quebra por faixa de preço ou por mais vendidas. "As 15 que mais saem" é um bloco que funciona sozinho e costuma converter melhor que o catálogo completo.</p>
+
+      <h3>A pergunta que abre tudo</h3>
+      <p>Coloca essa como mensagem de saudação automática do anúncio. Ela faz o trabalho sozinha enquanto ninguém está no WhatsApp:</p>
+      <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Saudação automática</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Aqui é a [SUA LOJA] 🧡 Já te mando o catálogo! O que você procura: [categoria 1], [categoria 2] ou [categoria 3]?</p></figure>
+      <p>Responder "legging" leva dois segundos. É por isso que funciona. Você não está pedindo pra ela decidir uma compra, está pedindo uma palavra.</p>
+      <aside class="callout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><p>Por que isso importa tanto: a conversa que passa do "oi" tem chance real de virar pedido. A que para no "oi" nunca teve. Nas contas que a gente analisou, só 38% passavam dessa primeira troca. Essa pergunta sozinha costuma levar esse número pra cima de 60%.</p></aside>
+      <hr />
+    </section>
+
+    <!-- PARTE 4 -->
+    <section class="parte" id="parte-4" aria-labelledby="t4">
+      <p class="rotulo-parte">Parte 4</p>
+      <h2 id="t4">O código da peça</h2>
+      <p>Essa é a mudança mais barata com o maior retorno do material inteiro.</p>
+      <p>Sem código, pra pedir uma peça a lojista precisa descrever. E descrever dá trabalho:</p>
+      <figure class="msg errada"><figcaption class="msg-topo"><span class="msg-quando">Sem código</span><span class="pilula">WhatsApp</span></figcaption><p class="msg-texto">"Oi, eu queria aquela preta da quarta foto, a que tem renda na lateral. Não é a de alcinha fina, é a outra. Acho que era a quinta na verdade."</p></figure>
+      <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Com código</span><span class="pilula">WhatsApp</span></figcaption><p class="msg-texto">"Quero CL-012, CL-018 e CL-023"</p></figure>
+      <p>A primeira leva vinte mensagens de ida e volta e ainda sai errada, com risco de troca e de cliente insatisfeita. A segunda leva duas e o pedido já está montado.</p>
+
+      <h3>Como numerar sem refazer tudo</h3>
+      <p>Não precisa de sistema nem de refazer o catálogo. Precisa de um código visível embaixo de cada foto.</p>
+      <p>Use duas letras da categoria mais um número sequencial: <strong>CL-012</strong> pra calcinha, <strong>LG-007</strong> pra legging, <strong>JE-034</strong> pra jeans. Letra identifica a linha, número identifica a peça.</p>
+      <p>Depois que mandar o bloco, a mensagem seguinte é sempre a mesma:</p>
+      <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Logo depois do catálogo</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Embaixo de cada foto tem o código da peça 📌
+
+Me manda os códigos que você gostou que eu já monto seu pedido e te passo o total.</p></figure>
+      <p>Repara que essa mensagem faz três coisas: ensina como usar, pede uma ação concreta e promete o próximo passo. Ela é o que impede a conversa de morrer no PDF.</p>
+      <hr />
+    </section>
+
+    <!-- PARTE 5 -->
+    <section class="parte" id="parte-5" aria-labelledby="t5">
+      <p class="rotulo-parte">Parte 5</p>
+      <h2 id="t5">As cinco cadências</h2>
+      <p>Cadência é uma sequência de contatos decidida antes: quando, por qual canal e com qual motivo. Não é insistência. Cada toque precisa de um motivo novo pra ela responder.</p>
+      <p>A regra que vale pras cinco: <strong>"passando pra saber se viu" não é motivo</strong>. Se você não tem o que dizer de novo, não manda.</p>
+
+      <!-- Cadência 1 -->
+      <div class="cadencia">
+        <h4><span>Cadência 1</span>Chamou pelo anúncio e não respondeu</h4>
+        <p class="quando-usar"><b>Quando usar:</b> ela clicou no anúncio, caiu no seu WhatsApp, recebeu a saudação e não respondeu nada. É a mais comum e a mais ignorada.</p>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 0 · 3 horas depois</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Passando só pra deixar o atalho aqui 😊
+
+Me diz uma palavra do que você procura ([categoria 1], [categoria 2] ou [categoria 3]) que eu já te mando o catálogo dessa linha.</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 1 · manhã</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Bom dia! Separei aqui as 3 peças que mais saíram essa semana pras lojistas 👇
+
+[3 fotos com código e preço]
+
+Se gostar de alguma, me manda o código que eu te passo o valor fechado.</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 3</span><span class="pilula">Áudio curto</span><button class="copiar" type="button">Copiar roteiro</button></figcaption><p class="nota" style="margin:0 0 8px">Áudio de até 30 segundos: seu nome, a loja, e uma pergunta só.</p><p class="msg-texto">"Oi [nome], aqui é a [seu nome] da [loja]. Você chamou a gente dia [X] e eu não quis te encher de mensagem. Me diz só uma coisa: você trabalha mais com [categoria 1] ou [categoria 2]? Aí eu te mando o certo."</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 7 · despedida</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Vou encerrar seu atendimento por aqui pra não te incomodar 😊
+
+Se precisar repor em algum momento, é só me chamar que eu te atendo na hora. Fico por aqui!</p></figure>
+        <aside class="callout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><p>A despedida é a que mais recebe resposta. Parece contraintuitivo e não é: quando você para de insistir, some a pressão, e quem estava enrolando responde. Não pule essa mensagem.</p></aside>
+      </div>
+
+      <!-- Cadência 2 -->
+      <div class="cadencia">
+        <h4><span>Cadência 2</span>Recebeu o catálogo e sumiu</h4>
+        <p class="quando-usar"><b>Quando usar:</b> a mais importante de todas, porque é onde morreu a maior parte das 1.054 conversas. Ela viu as peças, não respondeu.</p>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 0 · 2 horas depois</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Pra te ajudar a escolher, essas 3 são as que mais giram nas lojas 👇
+
+[CL-012] · [CL-018] · [CL-023]
+
+Qual delas combina mais com o seu público?</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 1</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Me diz com sinceridade: o que te segurou? 😊
+
+Se foi o mínimo do pedido, o prazo ou alguma dúvida da peça, me fala que eu vejo o que dá pra fazer.</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 3</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Entrou peça nova hoje e lembrei de você 👀
+
+[2 fotos com código]
+
+Essa linha costuma sair rápido. Quer que eu reserve enquanto você decide?</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 5</span><span class="pilula">Ligação</span></figcaption><p class="msg-texto">Ligação de 60 segundos. Quem é você, de onde ela veio, uma pergunta. Depois da pergunta, silêncio. Deixa ela falar.</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 8 · despedida</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Vou fechar seu atendimento aqui 😊
+
+Deixei seus códigos salvos. Quando quiser retomar, me chama que eu puxo seu pedido de onde parou.</p></figure>
+      </div>
+
+      <!-- Cadência 3 -->
+      <div class="cadencia">
+        <h4><span>Cadência 3</span>Perguntou preço e sumiu</h4>
+        <p class="quando-usar"><b>Quando usar:</b> quando some depois do preço, quase nunca é o valor da peça. É o mínimo do pedido ou a dúvida se vai conseguir vender.</p>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 0 · 1 hora depois</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Ah, e só pra deixar claro: você pode misturar os modelos pra fechar o mínimo 😉
+
+Não precisa levar tudo igual. Dá pra montar um mix de linhas diferentes.</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 1</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Fiz a conta aqui pra você ver 👇
+
+Comprando a [peça] por R$ [X] e vendendo por R$ [Y], são R$ [margem] de lucro por peça. No pacote fechado, R$ [total].
+
+Faz sentido pro seu preço de venda?</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 3</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Uma lojista de [cidade] começou com o mínimo mês passado e já fez o segundo pedido 😊
+
+Se quiser, te mostro o que ela levou pra você ter uma ideia de mix.</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 6 · despedida</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Encerrando por aqui pra não te atrapalhar 😊
+
+Qualquer dia que quiser testar com o mínimo, me chama. Fico à disposição!</p></figure>
+      </div>
+
+      <!-- Cadência 4 -->
+      <div class="cadencia">
+        <h4><span>Cadência 4</span>Comprou uma vez e não voltou</h4>
+        <p class="quando-usar"><b>Quando usar:</b> a mais lucrativa e a mais esquecida. Ela já confia em você, já conhece a peça e já sabe o processo. Custa zero de anúncio.</p>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">20 dias após a entrega</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi [nome]! Tudo bem? 😊
+
+Me conta: como girou a [peça/linha] que você levou? Saiu bem?</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 25</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Chegou coleção nova e tem peça na mesma pegada da que você levou 👇
+
+[3 fotos com código]
+
+Quer que eu separe pra você?</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Dia 32</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Vou mandar seu último pedido aqui pra facilitar 👇
+
+[lista de códigos do pedido anterior]
+
+Quer repetir o mesmo mix ou prefere trocar alguma peça?</p></figure>
+        <aside class="callout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><p>Repetir o pedido anterior é a mensagem de maior conversão do atacado. Você tira todo o trabalho de decisão dela. Ela só responde "pode repetir" e o pedido está fechado.</p></aside>
+      </div>
+
+      <!-- Cadência 5 -->
+      <div class="cadencia">
+        <h4><span>Cadência 5</span>Base antiga parada</h4>
+        <p class="quando-usar"><b>Quando usar:</b> gente que comprou há seis meses ou mais, ou que se cadastrou e nunca comprou. Precisa de um motivo real, não de um "oi, sumiu".</p>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Toque 1</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi [nome]! Aqui é a [loja], tudo bem? 😊
+
+Faz um tempo que a gente não se fala. Mudou bastante coisa por aqui: [novidade real: coleção nova, mínimo menor, frete, prazo].
+
+Quer dar uma olhada no que tem de novo?</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Toque 2 · 3 dias depois</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Separei as 10 que mais saíram esse mês 👇
+
+[bloco com códigos]
+
+Se quiser ver outra linha, é só me falar qual.</p></figure>
+        <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Toque 3 · 7 dias depois</span><span class="pilula">WhatsApp</span><button class="copiar" type="button">Copiar</button></figcaption><p class="msg-texto">Oi! Última de mim por aqui 😊
+
+Se quiser voltar a comprar com a gente em algum momento, é só chamar. Deixo meu contato salvo aqui pra quando precisar!</p></figure>
+        <aside class="callout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><p>Sem motivo real, não invente um. Reativação sem novidade vira spam, e aí você queima uma base que levou anos pra construir. Se não tem o que falar de novo, espere até ter.</p></aside>
+      </div>
+      <hr />
+    </section>
+
+    <!-- PARTE 6 -->
+    <section class="parte" id="parte-6" aria-labelledby="t6">
+      <p class="rotulo-parte">Parte 6</p>
+      <h2 id="t6">Quando trocar o texto pelo áudio</h2>
+      <p>No WhatsApp você compete com tudo: o cliente na frente dela, o grupo da família, o fornecedor concorrente. Ela lê e some.</p>
+      <p>O áudio isola a conversa. A voz gera confiança e mostra que tem gente de verdade do outro lado, não um robô mandando catálogo.</p>
+      <p class="destaque-frase">Regra prática: duas mensagens sem resposta, manda áudio.</p>
+
+      <h3>Como gravar</h3>
+      <p>Até 30 segundos. Áudio longo não é ouvido, é só visto e ignorado.</p>
+      <p>A estrutura é sempre: nome dela, quem é você, de onde ela veio, <strong>uma</strong> pergunta. Depois da pergunta, encerra. Não enche de informação.</p>
+      <figure class="msg"><figcaption class="msg-topo"><span class="msg-quando">Modelo de áudio · até 30s</span><span class="pilula">Áudio</span><button class="copiar" type="button">Copiar roteiro</button></figcaption><p class="msg-texto">"Oi [nome], aqui é a [seu nome] da [loja]. Você chamou a gente dia [X] e eu não quis ficar te enchendo de mensagem. Só queria te perguntar uma coisa: você trabalha mais com [categoria 1] ou [categoria 2]? Aí eu separo o certo pra você."</p></figure>
+
+      <h3>O que não fazer</h3>
+      <p>Áudio de três minutos explicando a loja inteira. Áudio lendo o catálogo. Áudio só dizendo "oi, tudo bem, passando pra saber se você viu". Nenhum desses é ouvido até o fim.</p>
+      <hr />
+    </section>
+
+    <!-- PARTE 7 -->
+    <section class="parte" id="parte-7" aria-labelledby="t7">
+      <p class="rotulo-parte">Parte 7</p>
+      <h2 id="t7">Como medir se está funcionando</h2>
+      <p>A maioria olha só uma coisa: quantas pessoas chamaram. Esse número não diz nada sozinho, porque ele mede o anúncio, não a venda.</p>
+      <p>Essas cinco mostram onde a conversa está morrendo. Conte uma vez por semana, nem que seja no caderno.</p>
+      <div class="tabela" role="region" aria-label="Tabela de métricas" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Métrica</th><th scope="col">Como contar</th><th scope="col">Onde deveria estar</th></tr></thead>
+          <tbody>
+            <tr><td>Tempo da 1ª resposta</td><td>Do "oi" dela até a sua resposta</td><td class="num">Abaixo de 10 minutos no horário comercial</td></tr>
+            <tr><td>Taxa de resposta</td><td>Quantas receberam resposta sua</td><td class="num">Acima de 95%</td></tr>
+            <tr><td>Passou do "oi"</td><td>Quantas trocaram 2 mensagens ou mais</td><td class="num">Acima de 60%</td></tr>
+            <tr><td>Chegou na 5ª</td><td>Quantas trocaram 5 mensagens ou mais</td><td class="num">Acima de 15%</td></tr>
+            <tr><td>Bloqueios</td><td>Quantas bloquearam ou denunciaram</td><td class="num">Abaixo de 1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Como ler os números</h3>
+      <p><strong>Se "passou do oi" está baixo</strong>, o problema é a saudação. Ela não dá motivo pra responder. Troca por uma pergunta de categoria.</p>
+      <p><strong>Se "passou do oi" está bom mas "chegou na 5ª" está zerado</strong>, o problema é o catálogo. É o caso mais comum, e foi o das quatro distribuidoras.</p>
+      <p><strong>Se o bloqueio passa de 1%</strong>, aí sim o público está errado ou a cadência virou insistência. Aqui o problema é de mídia, não de atendimento.</p>
+      <aside class="callout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><p>Uma métrica que não é métrica: "quantas pessoas chamaram" mede o anúncio, não o seu atendimento. Dá pra dobrar esse número gastando o dobro, sem vender um real a mais. Olhe a 5ª mensagem, que é onde o pedido mora.</p></aside>
+      <hr />
+    </section>
+
+    <!-- PARTE 8 -->
+    <section class="parte" id="parte-8" aria-labelledby="t8">
+      <p class="rotulo-parte">Parte 8</p>
+      <h2 id="t8">Implantação em uma semana</h2>
+      <p>Não precisa de sistema, de CRM nem de contratar ninguém. Precisa de cinco dias e de alguém responsável por cada passo.</p>
+      <ol class="linha-tempo">
+        <li><span class="dia">Dia 1</span><div><b>Separe o catálogo por categoria</b><span>Use as palavras que a lojista usa. De 12 a 20 peças por bloco. Pode ser no Canva mesmo, não precisa de designer pra começar.</span></div></li>
+        <li><span class="dia">Dia 2</span><div><b>Coloque código em toda peça</b><span>Duas letras da categoria mais número sequencial. Embaixo da foto, legível no celular.</span></div></li>
+        <li><span class="dia">Dia 3</span><div><b>Troque a saudação automática</b><span>Sai o "Como podemos ajudar?", entra a pergunta de categoria. Configure também a mensagem de ausência.</span></div></li>
+        <li><span class="dia">Dia 4</span><div><b>Salve as cadências como respostas rápidas</b><span>No WhatsApp Business, menu de respostas rápidas. Cada mensagem deste material vira um atalho.</span></div></li>
+        <li><span class="dia">Dia 5</span><div><b>Defina quem puxa o follow-up e quando</b><span>Uma pessoa, um horário fixo do dia, uma planilha simples com nome, data do último contato e próximo passo. Sem dono e sem data, não acontece.</span></div></li>
+      </ol>
+      <aside class="callout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><p>Comece pelo dia 1 e 2 mesmo que não faça o resto. Catálogo separado e código na peça sozinhos já mudam o número da quinta mensagem. O resto potencializa.</p></aside>
+      <hr />
+    </section>
+
+    <!-- PARTE 9 -->
+    <section class="parte" id="parte-9" aria-labelledby="t9">
+      <p class="rotulo-parte">Parte 9</p>
+      <h2 id="t9">Próximo passo</h2>
+      <p>Se você chegou até aqui, já sabe onde a sua conversa provavelmente está morrendo. O que você ainda não sabe é quanto isso está te custando.</p>
+      <p>Essa conta existe e dá pra fazer: quanto você pagou por cada conversa, quantas passaram do "oi", quantas chegaram na quinta mensagem e quanto você deixou na mesa por causa do degrau entre uma coisa e outra.</p>
+      <p>É o que a gente faz todo dia nas contas que gerencia.</p>
+
+      <div class="cta">
+        <h2>Quer ver esses números na sua conta?</h2>
+        <p>A gente abre a sua conta de anúncios, mede o funil de conversa do seu WhatsApp e te mostra exatamente em que ponto a venda está sendo perdida. Sem compromisso.</p>
+        <a class="botao" href="https://wa.me/558181697148?text=Ol%C3%A1%2C%20Carlos%21%20Li%20o%20material%20%22Atendimento%20que%20fecha%20pedido%22%20e%20quero%20ver%20esses%20n%C3%BAmeros%20na%20minha%20conta." target="_blank" rel="noopener" data-evento="clique_cta_atendimento">Falar com a Desenvor
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="assinatura"><img src="/assets/logo.svg" width="250" height="193" alt="" />Desenvor · gestão de tráfego para atacado · Santa Cruz do Capibaribe, PE</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape coluna">
+    <p><strong>Sobre os dados deste material.</strong> Os números vêm da análise de 1.054 conversas de WhatsApp em quatro contas de anúncio gerenciadas pela Desenvor, em quatro segmentos diferentes do atacado de moda. As métricas de conversa foram medidas no Gerenciador de Anúncios da Meta.</p>
+    <a class="voltar" href="/">← Voltar para a Desenvor</a>
+  </footer>
+
+  <script>
+    (function () {
+      // Botão "Copiar" das mensagens prontas
+      document.querySelectorAll('.copiar').forEach(function (botao) {
+        var original = botao.textContent;
+        var timer;
+        botao.addEventListener('click', async function () {
+          var texto = botao.closest('.msg').querySelector('.msg-texto').textContent.trim();
+          try {
+            await navigator.clipboard.writeText(texto);
+            botao.textContent = 'Copiado';
+            botao.classList.add('ok');
+          } catch (e) {
+            botao.textContent = 'Não deu, copie à mão';
+          }
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            botao.textContent = original;
+            botao.classList.remove('ok');
+          }, 1600);
+        });
+      });
+
+      // Barra de progresso de leitura
+      var barra = document.querySelector('.progresso');
+      var agendado = false;
+      function atualizar() {
+        agendado = false;
+        var max = document.documentElement.scrollHeight - innerHeight;
+        barra.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, scrollY / max) : 0) + ')';
+      }
+      addEventListener('scroll', function () {
+        if (!agendado) { agendado = true; requestAnimationFrame(atualizar); }
+      }, { passive: true });
+      atualizar();
+
+      // Funil cresce quando entra na tela
+      var funil = document.querySelector('.funil');
+      if (funil && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        funil.classList.add('anima');
+        var obs = new IntersectionObserver(function (entradas) {
+          if (entradas[0].isIntersecting) { funil.classList.remove('anima'); obs.disconnect(); }
+        }, { threshold: .4 });
+        obs.observe(funil);
+      }
+
+      // Registro de cliques (Pixel da Meta / Google, se instalados)
+      document.querySelectorAll('[data-evento]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var nome = el.getAttribute('data-evento');
+          if (typeof window.fbq === 'function') window.fbq('trackCustom', nome);
+          if (typeof window.gtag === 'function') window.gtag('event', nome);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
